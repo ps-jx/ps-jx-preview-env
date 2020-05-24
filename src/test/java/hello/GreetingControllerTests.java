@@ -16,8 +16,7 @@
 package hello;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import org.junit.Test;
@@ -33,34 +32,26 @@ import org.springframework.test.web.servlet.MockMvc;
 @AutoConfigureMockMvc
 public class GreetingControllerTests {
 
-    @Autowired
-    private MockMvc mockMvc;
+  @Autowired
+  private MockMvc mockMvc;
 
-    @Test
-    public void noParamGreetingShouldReturnDefaultMessage() throws Exception {
+  @Test
+  public void shouldReturnGreetings() throws Exception {
 
-        this.mockMvc.perform(get("/greeting")).andDo(print()).andExpect(status().isOk())
-                .andExpect(jsonPath("$.content").value("Hello there, World!"));
-    }
+    mockMvc.perform(get("/greeting?greetingType=ANGRY"))
+        .andExpect(status().isOk())
+        .andExpect(content().string("You are not welcome here."));
 
-    @Test
-    public void noParamDefaultEndpointShouldReturnDefaultMessage() throws Exception {
-        this.mockMvc.perform(get("/")).andDo(print()).andExpect(status().isOk());
-    }
+    mockMvc.perform(get("/greeting?greetingType=HAPPY"))
+        .andExpect(status().isOk())
+        .andExpect(content().string("Wonderful to meet you."));
 
-    @Test
-    public void paramGreetingShouldReturnTailoredMessage() throws Exception {
+    mockMvc.perform(get("/greeting?greetingType=NEUTRAL"))
+        .andExpect(status().isOk())
+        .andExpect(content().string("Hello."));
 
-        this.mockMvc.perform(get("/greeting").param("name", "Spring Community"))
-                .andDo(print()).andExpect(status().isOk())
-                .andExpect(jsonPath("$.content").value("Hello there, Spring Community!"));
-    }
-
-    @Test
-    public void paramDefaultEndpointShouldReturnTailoredMessage() throws Exception {
-        this.mockMvc.perform(get("/").param("name", "Spring Community"))
-                .andDo(print()).andExpect(status().isOk());
-    }
-    
-
+    mockMvc.perform(get("/greeting?greetingType=SAD"))
+        .andExpect(status().isOk())
+        .andExpect(content().string("It's not very fun here, sorry"));
+  }
 }
