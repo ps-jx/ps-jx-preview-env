@@ -15,6 +15,10 @@ cleanup:
     helm.sh/hook: pre-delete
     helm.sh/hook-delete-policy: hook-succeeded
 
+postgres:
+  postgresqlUsername: postgres
+  postgresqlPassword: password
+
 preview:
   image:
     repository:
