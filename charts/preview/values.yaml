@@ -16,8 +16,8 @@ cleanup:
     helm.sh/hook-delete-policy: hook-succeeded
 
 mysql:
-  mysqlUser: springuser
-  mysqlPassword: bbb
+  mysqlUser: testuser
+  mysqlPassword: testuserpass
   mysqlDatabase: db_example
 
 preview:
