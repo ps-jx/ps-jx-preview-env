@@ -15,8 +15,10 @@ cleanup:
     helm.sh/hook: pre-delete
     helm.sh/hook-delete-policy: hook-succeeded
 
-postgresql:
-  postgresqlPassword: foobarfoobar
+mysql:
+  mysqlUser: mysqluser
+  mysqlpassword: mysqlpassword
+  mysqlDatabase: mysqldatabase
 
 preview:
   image:
