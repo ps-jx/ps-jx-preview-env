@@ -17,7 +17,7 @@ cleanup:
 
 mysql:
   mysqlUser: mysqluser
-  mysqlpassword: mysqlpassword
+  mysqlPassword: mysqlpassword
   mysqlDatabase: mysqldatabase
 
 preview:
