@@ -18,10 +18,16 @@ cleanup:
 mysql:
   mysqlUser: testuser
   mysqlPassword: testuserpass
-  mysqlDatabase: db_example
+  mysqlDatabase: preview_database
 
 preview:
   image:
     repository:
     tag:
     pullPolicy: IfNotPresent
+    env:
+      MYSQL_HOST: preview-mysql
+      MYSQL_PORT: 3306
+      MYSQL_USER: testuser
+      MYSQL_PASSWORD: testuserpass
+      MYSQL_DATABASE: preview_database
