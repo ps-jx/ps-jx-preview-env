@@ -1,12 +1,34 @@
 package hello;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "greeting")
 public class Greeting {
 
-    private final long id;
-    private final String content;
+    @Id
+    @GeneratedValue
+    private long id;
 
-    public Greeting(long id, String content) {
-        this.id = id;
+    @Column
+    private GreetingType greetingType = GreetingType.NEUTRAL;
+
+    @Column(name = "content")
+    private String content;
+
+    public Greeting() {
+    }
+
+    public Greeting(GreetingType greetingType, String content) {
+        this.greetingType = greetingType;
+        this.content = content;
+    }
+
+    public void setContent(String content) {
         this.content = content;
     }
 
@@ -16,5 +38,17 @@ public class Greeting {
 
     public String getContent() {
         return content;
+    }
+
+    public GreetingType getGreetingType() {
+        return greetingType;
+    }
+
+    public void setGreetingType(GreetingType greetingType) {
+        this.greetingType = greetingType;
+    }
+
+    public static enum GreetingType {
+        NEUTRAL, HAPPY, SAD, ANGRY
     }
 }
