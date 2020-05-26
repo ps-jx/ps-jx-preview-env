@@ -15,8 +15,19 @@ cleanup:
     helm.sh/hook: pre-delete
     helm.sh/hook-delete-policy: hook-succeeded
 
+mysql:
+  mysqlUser: testuser
+  mysqlPassword: testuserpass
+  mysqlDatabase: preview_database
+
 preview:
   image:
     repository:
     tag:
     pullPolicy: IfNotPresent
+  env:
+    MYSQL_HOST: preview-mysql
+    MYSQL_PORT: 3306
+    MYSQL_USER: testuser
+    MYSQL_PASSWORD: testuserpass
+    MYSQL_DATABASE: preview_database
